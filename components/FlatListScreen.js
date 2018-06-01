@@ -6,7 +6,8 @@ import { Button,
     StyleSheet,
     FlatList,
     Image,
-    Alert
+    Alert,
+    TouchableOpacity
 } from 'react-native';
 import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 import Swipeout from 'react-native-swipeout'
@@ -96,6 +97,16 @@ export default class BasicFlatList extends React.Component {
     }
     static navigationOptions = {
         title: 'Flat List',
+        headerRight:(
+            <TouchableOpacity style={{
+                flex: 1, 
+                justifyContent: 'center', 
+                height: 56, width: 56, 
+                padding: 10
+                }}>
+                <Image style={{height: 36, width: 36}} source={require('../images/add_button.png')}/>
+            </TouchableOpacity>
+        )
     };
     render(){
         return(
