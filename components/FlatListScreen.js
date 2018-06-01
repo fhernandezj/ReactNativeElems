@@ -4,7 +4,8 @@ import { Button,
     Text, 
     YellowBox,
     StyleSheet,
-    FlatList
+    FlatList,
+    Image
 } from 'react-native';
 import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
@@ -16,10 +17,19 @@ class FlatListItem extends React.Component {
         return(
             <View style={{
                 flex: 1,
+                flexDirection: 'row',
                 backgroundColor: this.props.index % 2 == 0 ? 'mediumseagreen' : 'tomato'
             }}>
-                <Text style={styles.flatListItem}>{this.props.item.name}</Text>
-                <Text style={styles.flatListItem}>{this.props.item.foodDescription}</Text>
+                <Image
+                    source={{uri: this.props.item.url}}
+                    style={{width: 100, height: 100, margin: 5}}/>
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'column'
+                }}>
+                    <Text style={styles.flatListItem}>{this.props.item.name}</Text>
+                    <Text style={styles.flatListItem}>{this.props.item.foodDescription}</Text>
+                </View>
             </View>
         );
     }
