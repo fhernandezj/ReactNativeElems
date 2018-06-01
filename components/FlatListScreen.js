@@ -11,6 +11,7 @@ import { Button,
 } from 'react-native';
 import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 import Swipeout from 'react-native-swipeout'
+import AddModal from './AddModal'
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 import flatListData from '../data/flatListData'
@@ -88,30 +89,48 @@ export default class BasicFlatList extends React.Component {
             deletedRowKey: null
         });
     }
+
     refreshFlatList = (deletedKey) => {
         this.setState((prevState) => {
             return {
                 deletedRowKey: deletedKey
             };
+        });
+        this.refs.flatList.scrollToEnd();
+    }
+
+    _onPressAdd() {
+        this.refs.addModal.showAddModal();
+    }
+
+    static navigationOptions = ({navigation}) => {
+        const {params = {}} = navigation.state;
+        return{
+            title: 'Flat List',
+            headerRight: (
+                <TouchableOpacity style={{
+                    flex: 1, 
+                    justifyContent: 'center', 
+                    height: 56, width: 56, 
+                    padding: 10
+                    }}
+                    onPress={() => params._onPressAdd()}>
+                    <Image style={{height: 36, width: 36}} source={require('../images/add_button.png')}/>
+                </TouchableOpacity>
+            )
+        }
+    };
+
+    componentWillMount(){
+        this.props.navigation.setParams({
+            _onPressAdd: this._onPressAdd.bind(this)
         })
     }
-    static navigationOptions = {
-        title: 'Flat List',
-        headerRight:(
-            <TouchableOpacity style={{
-                flex: 1, 
-                justifyContent: 'center', 
-                height: 56, width: 56, 
-                padding: 10
-                }}>
-                <Image style={{height: 36, width: 36}} source={require('../images/add_button.png')}/>
-            </TouchableOpacity>
-        )
-    };
     render(){
         return(
             <View style={{flex:1}}>
                 <FlatList
+                    ref = {"flatList"}
                     data={flatListData}
                     renderItem={({item, index}) => {
                         return (
@@ -120,6 +139,9 @@ export default class BasicFlatList extends React.Component {
                         );
                     }}>
                 </FlatList>
+                <AddModal ref={'addModal'} parentFlatList={this}>
+
+                </AddModal>
             </View>
         )
     }
