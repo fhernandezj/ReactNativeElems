@@ -12,11 +12,26 @@ import { Button,
 import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 import Swipeout from 'react-native-swipeout'
 import AddModal from './AddModal'
+import EditModal from './EditModal'
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 import flatListData from '../data/flatListData'
 
 class FlatListItem extends React.Component {
+    constructor(props){
+        super(props);
+        this.state ={
+            activeRowKey: null,
+            numberOfRefresh: 0
+        }
+    }
+    refreshFlatListItem = () => {
+        this.setState((prevState) => {
+            return{
+                numberOfRefresh: prevState.numberOfRefresh + 1
+            }
+        });
+    }
     render(){
         const swipeSettings = {
             autoClose: true,
@@ -29,6 +44,13 @@ class FlatListItem extends React.Component {
                 this.setState({activeRowKey: this.props.item.key});
             },
             right: [
+                {
+                    onPress: () => {
+                        //alert("Update");
+                        this.props.parentFlatList.refs.editModal.showEditModal(flatListData[this.props.index], this);
+                    },
+                    text: 'Edit', type: 'primary'
+                },
                 {
                     onPress: () => {
                         const deletingRow = this.state.activeRowKey
@@ -96,6 +118,7 @@ export default class BasicFlatList extends React.Component {
                 deletedRowKey: deletedKey
             };
         });
+        console.log(flatListData);
         this.refs.flatList.scrollToEnd();
     }
 
@@ -140,8 +163,9 @@ export default class BasicFlatList extends React.Component {
                     }}>
                 </FlatList>
                 <AddModal ref={'addModal'} parentFlatList={this}>
-
                 </AddModal>
+                <EditModal ref={'editModal'} parentFlatList={this}>
+                </EditModal>
             </View>
         )
     }
