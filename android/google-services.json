@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "604633664759",
+    "firebase_url": "https://reactnativetut-41208.firebaseio.com",
+    "project_id": "reactnativetut-41208",
+    "storage_bucket": "reactnativetut-41208.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604633664759:android:698047759fee2f6e",
+        "android_client_info": {
+          "package_name": "com.helloworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604633664759-blka7b2didqu2e88e8mfjk1d93ppmfcv.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "604633664759-blka7b2didqu2e88e8mfjk1d93ppmfcv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkcwH9xh226DrEjdfkpRSMCJTpvh3Z1Mc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,6 +15,7 @@ import HScrollScreen from './components/HorizScroll'
 import ViewPager from './components/ViewPager'
 import BasicFlatList from './components/FlatListScreen'
 import HorizontalFlatList from './components/HorizontalFlatList'
+import BasicSectionList from './components/BasicSectionList'
 
 class MainScreen extends React.Component {
   static navigationOptions = {
@@ -35,6 +36,7 @@ class MainScreen extends React.Component {
         <Button title='View Pager' onPress={() => navigate('ViewP')}/>
         <Button title='FlatList' onPress={() => navigate('FlatList')}/>
         <Button title='Horizontal FlatList' onPress={() => navigate('HFlatList')}/>
+        <Button title='Section List' onPress={() => navigate('SecList')}/>
       </View>
     )
   }
@@ -49,7 +51,8 @@ const RootStack = createStackNavigator(
     HScroll: HScrollScreen,
     ViewP: ViewPager,
     FlatList: BasicFlatList,
-    HFlatList: HorizontalFlatList
+    HFlatList: HorizontalFlatList,
+    SecList: BasicSectionList
   }
 );
 
